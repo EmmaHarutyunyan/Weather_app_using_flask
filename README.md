@@ -66,9 +66,9 @@ The moon phases page explaining the different moon phases.
 Contributing 🤝
 Welcome contributions to this project! To contribute:
 
-Fork the repository.
-Clone your forked repository to your local machine.
-Create a new branch for your feature or bug fix.
-Make changes and commit them.
-Push your changes to your forked repository.
-Open a pull request.
+-Fork the repository.
+-Clone your forked repository to your local machine.
+-Create a new branch for your feature or bug fix.
+-Make changes and commit them.
+-Push your changes to your forked repository.
+-Open a pull request.
