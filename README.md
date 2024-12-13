@@ -1,4 +1,4 @@
-# Weather_app_using_flask 🌦️🌙
+ # Weather_app_using_flask 🌦️🌙
 Weather_app_using_flask
 
 
@@ -49,7 +49,7 @@ Start the Flask development server by running the following command:
 
 ```bash
 python app.py
-
+```
 
 Once the server starts, open http://127.0.0.1:5000/ in your web browser to access the Weather App!
 
