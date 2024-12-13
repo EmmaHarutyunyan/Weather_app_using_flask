@@ -58,6 +58,8 @@ Once the server starts, open http://127.0.0.1:5000/ in your web browser to acces
 Screenshots 📸
 Below are some screenshots of the app:
 
+![Tokyo](https://github.com/user-attachments/assets/088fff6b-6bb6-4e3f-9b19-15394d21f1fe)
+
 Example of the weather data and moon phase on the home page.
 
 The moon phases page explaining the different moon phases.
