@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Moon Phases</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/moon.css') }}">
+</head>
+<body style="background-image: url('{{ bg_url }}'); background-size: cover; background-position: center;">
+
+    <div class="moon-container">
+        <div class="moon-phases-box">
+            <div class="moon-phase">
+                <img src="{{ url_for('static', filename='images/new_moon.png') }}" alt="New Moon">
+                <h3>New Moon</h3>
+                <p>The New Moon marks the beginning of the lunar cycle. It is the phase when the moon is between the Earth and the Sun, making it invisible from Earth.</p>
+            </div>
+            <div class="moon-phase">
+                <img src="{{ url_for('static', filename='images/first_quarter.png') }}" alt="First Quarter">
+                <h3>First Quarter</h3>
+                <p>The First Quarter occurs when half of the moon is illuminated and half is in shadow. This phase is a time of decision-making and action.</p>
+            </div>
+            <div class="moon-phase">
+                <img src="{{ url_for('static', filename='images/full_moon.png') }}" alt="Full Moon">
+                <h3>Full Moon</h3>
+                <p>The Full Moon is when the moon is fully illuminated by the Sun, offering a bright and powerful energy. It's a time of completion and reflection.</p>
+            </div>
+            <div class="moon-phase">
+                <img src="{{ url_for('static', filename='images/last_quarter.png') }}" alt="Last Quarter">
+                <h3>Last Quarter</h3>
+                <p>The Last Quarter occurs when half of the moon is illuminated again, marking the end of the lunar cycle. It's a phase for letting go and releasing.</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="home-button">
+        <a href="{{ url_for('index') }}" class="btn">Back to Home</a>
+    </div>
+
+    <div class="moon-interesting">
+        <h2>Did You Know?</h2>
+        <p>Each moon phase has been believed to influence our emotions, energy, and actions. Many cultures around the world have traditions related to these phases, such as planting, harvesting, and even wedding ceremonies. Embrace the power of the moon!</p>
+    </div>
+    
+</body>
+</html>

@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather App</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="icon" href="http://openweathermap.org/img/wn/01d.png" type="image/x-icon">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body class="{{ 'night' if weather.is_night else 'day' }}" style="background-image: url('{{ weather.bg_url }}'); background-size: cover; background-position: center;">
+
+    <div class="main-container">
+        <div class="hourly-temperature-container">
+            <h3>Hourly Temperature</h3>
+            <canvas id="temperatureChart" width="400" height="400"></canvas>
+        </div>
+    
+        <div class="weather-info-container">
+            <div class="weather-container">
+                <h1>Weather App</h1>
+                <form method="POST">
+                    <input type="text" name="city" placeholder="Enter city name" required>
+                    <button type="submit">Get Weather</button>
+                    <button type="button" id="use-location">Use My Location</button>
+                </form>
+    
+                {% if weather.city_name %}
+                    <div class="weather-info">
+                        <h2>{{ weather.city_name }}</h2>
+                        <div class="weather-condition">
+                            <img src="{{ weather.icon_url }}" alt="Weather Icon" class="weather-icon">
+                            <p class="description">{{ weather.description }}</p>
+                            <p class="temperature">{{ weather.temperature }}°C</p>
+                            <p class="feels-like">Feels Like: {{ weather.feels_like }}°C</p>
+                            <a href="{{ url_for('about_moon') }}" class="moon-phase-link">
+                                <p class="moon-phase">Moon Phase: {{ weather.moon_phase }}</p>
+                            </a>
+                        </div>
+                    </div>
+                {% elif weather.error %}
+                    <p class="error">{{ weather.error }}</p>
+                {% endif %}
+    
+                <button id="refresh" onclick="location.reload();">Refresh</button>
+            </div>
+        </div>
+    
+        <div class="right-side-container">
+            <div class="map-container">
+                {% if weather.lat and weather.lon %}
+                    <iframe src="https://www.openstreetmap.org/export/embed.html?bbox={{ weather.lon-0.1 }},{{ weather.lat-0.1 }},{{ weather.lon+0.1 }},{{ weather.lat+0.1 }}&layer=mapnik&marker={{ weather.lat }},{{ weather.lon }}" frameborder="0"></iframe>
+                    <br><small><a href="https://www.openstreetmap.org/?mlat={{ weather.lat }}&mlon={{ weather.lon }}#map=12/{{ weather.lat }}/{{ weather.lon }}">View Larger Map</a></small>
+                {% else %}
+                    <p class="error">Unable to display map due to missing location data.</p>
+                {% endif %}
+            </div>
+
+            {% if weather.pexels_image_url %}
+                <img src="{{ weather.pexels_image_url }}" alt="City Image" class="city-image">
+            {% endif %}
+        </div>
+    </div>
+
+    <script>
+       document.addEventListener('DOMContentLoaded', () => {
+            const hourlyContainer = document.querySelector('.hourly-temperature-container');
+            const rightSideContainer = document.querySelector('.right-side-container');
+            const mapContainer = document.querySelector('.map-container');
+
+            async function fetchHourlyData() {
+                try {
+                    const cityName = document.querySelector('.weather-info h2')?.innerText;
+                    if (!cityName) {
+                        console.error('City name not found.');
+                        return null;
+                    }
+
+                    const response = await fetch('/get_hourly_data', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({ city_name: cityName }),
+                    });
+
+                    if (response.ok) {
+                        return await response.json();
+                    } else {
+                        console.error('Failed to fetch hourly data:', response.statusText);
+                        return null;
+                    }
+                } catch (error) {
+                    console.error('Error fetching hourly data:', error);
+                    return null;
+                }
+            }
+
+            async function initializeChart() {
+                const data = await fetchHourlyData();
+                if (data) {
+                    hourlyContainer.style.display = 'block';
+                    rightSideContainer.style.display = 'block';
+                    mapContainer.style.display = 'block';
+
+                    const ctx = document.getElementById('temperatureChart').getContext('2d');
+                    new Chart(ctx, {
+                        type: 'line',
+                        data: {
+                            labels: data.hourly_labels,
+                            datasets: [
+                                {
+                                    label: 'Hourly Temperature (°C)',
+                                    data: data.hourly_temperatures,
+                                    borderColor: 'rgba(75, 192, 192, 1)',
+                                    backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                                    borderWidth: 2,
+                                    fill: true,
+                                    tension: 0.4,
+                                },
+                            ],
+                        },
+                        options: {
+                            responsive: true,
+                            scales: {
+                                y: {
+                                    beginAtZero: false,
+                                    ticks: {
+                                        stepSize: 1,
+                                    },
+                                },
+                            },
+                            plugins: {
+                                tooltip: {
+                                    callbacks: {
+                                        label: function (tooltipItem) {
+                                            return tooltipItem.raw + '°C';
+                                        },
+                                    },
+                                },
+                            },
+                        },
+                    });
+                }
+            }
+
+            initializeChart();
+        });
+    </script>
+
+</body>
+</html>
