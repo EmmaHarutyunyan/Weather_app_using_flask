@@ -25,8 +25,8 @@ To run this project locally, you’ll need to follow these steps:
 
 ### 1. Clone the Repository
 ```bash
-git clone https://github.com/your-username/weather-app.git
-cd weather-app
+[git clone https://github.com/your-username/weather-app.git
+cd weather-app](https://github.com/EmmaHarutyunyan/Weather_app_using_flask.git)
 ```
 
 ### 2. Set Up Environment Variables
