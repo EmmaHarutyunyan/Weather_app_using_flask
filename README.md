@@ -27,7 +27,7 @@ To run this project locally, you’ll need to follow these steps:
 ```bash
 git clone https://github.com/EmmaHarutyunyan/Weather_app_using_flask.git
 cd Weather_app_using_flask
-
+```
 
 ### 2. Set Up Environment Variables
 Create a `.env` file in the root directory and add your personal API keys:
