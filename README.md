@@ -25,9 +25,9 @@ To run this project locally, you’ll need to follow these steps:
 
 ### 1. Clone the Repository
 ```bash
-[git clone https://github.com/your-username/weather-app.git
-cd weather-app](https://github.com/EmmaHarutyunyan/Weather_app_using_flask.git)
-```
+git clone https://github.com/EmmaHarutyunyan/Weather_app_using_flask.git
+cd Weather_app_using_flask
+
 
 ### 2. Set Up Environment Variables
 Create a `.env` file in the root directory and add your personal API keys:
@@ -63,12 +63,12 @@ Example of the weather data and moon phase on the home page.
 The moon phases page explaining the different moon phases.
 
 
-Contributing 🤝
+### Contributing 🤝
 Welcome contributions to this project! To contribute:
 
--Fork the repository.
--Clone your forked repository to your local machine.
--Create a new branch for your feature or bug fix.
--Make changes and commit them.
--Push your changes to your forked repository.
--Open a pull request.
+- Fork the repository.
+- Clone your forked repository to your local machine.
+- Create a new branch for your feature or bug fix.
+- Make changes and commit them.
+- Push your changes to your forked repository.
+- Open a pull request.
